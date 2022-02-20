@@ -21,7 +21,7 @@ import FollowController from "./controllers/FollowController";
 import mongoose from "mongoose";
 
 // build the connection string
-mongoose.connect('mongodb+srv://nsoevik:England11@cluster0.k1bdu.mongodb.net/myFirstDatabase?retryWrites=true&w=majority')
+mongoose.connect('mongodb+srv://nsoevik:England11@cluster0.9uq33.mongodb.net/test')
 
 const app = express();
 app.use(express.json());
