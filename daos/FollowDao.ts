@@ -25,7 +25,7 @@ export default class FollowDao implements FollowDaoI {
         FollowModel.create({followee: uid, follower: fid});
     userUnFollowsUser = async (uid: string, fid: string): Promise<any> =>
         FollowModel.deleteOne({followee: uid, follower: fid});
-    userUnFollowsAll = async (uid: string): Promise<any> =>
+    userUnFollowsAllUsers = async (uid: string): Promise<any> =>
         FollowModel.deleteMany({follower: uid});
     // userFollowsAllFollowers = async (uid: string): Promise<any> =>
     //     FollowModel.createMany({follower: uid});

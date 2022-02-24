@@ -37,7 +37,8 @@
              app.get("/api/users/:uid/follows", FollowController.followController.findAllUsersFollowedByUser);
              app.get("/api/users/:uid/followers", FollowController.followController.findAllUsersThatFollowUser);
              app.post("/api/users/:uid/follows/:rid", FollowController.followController.userFollowsUser);
-             app.delete("/api/users/:uid/unfollows/:rid", FollowController.followController.userUnFollowsUser);
+             app.delete("/api/users/:uid/follows/:rid", FollowController.followController.userUnFollowsUser);
+             app.delete("/api/users/:uid/follows", FollowController.followController.userUnFollowsAllUsers);
              //app.post("/api/users/:uid/followers", FollowController.followController.userFollowsAllFollowers);
          }
          return FollowController.followController;
@@ -87,6 +88,17 @@
       * on whether deleting the follows was successful or not
       */
       userUnFollowsUser = (req: Request, res: Response) =>
+         FollowController.followDao.userUnFollowsUser(req.params.uid, req.params.rid)
+             .then(status => res.send(status));
+
+     /**
+      * @param {Request} req Represents request from client, including the
+      * path parameters uid and tid representing the user that is unfollowing
+      * the user and the user being unfollowed
+      * @param {Response} res Represents response to client, including status
+      * on whether deleting the follows was successful or not
+      */
+      userUnFollowsAllUsers = (req: Request, res: Response) =>
          FollowController.followDao.userUnFollowsUser(req.params.uid, req.params.rid)
              .then(status => res.send(status));
 
