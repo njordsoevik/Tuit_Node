@@ -4,6 +4,7 @@ import Course from "../mongoose/courses/Course";
 import SectionDao from "./SectionDao";
 import mongoose from "mongoose";
 
+
 export default class CourseDao implements CourseDaoI {
     static courseDao: CourseDao = new CourseDao();
     sectionDao: SectionDao = SectionDao.getInstance();

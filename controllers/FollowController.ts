@@ -99,7 +99,7 @@
       * on whether deleting the follows was successful or not
       */
       userUnFollowsAllUsers = (req: Request, res: Response) =>
-         FollowController.followDao.userUnFollowsUser(req.params.uid, req.params.rid)
+         FollowController.followDao.userUnFollowsAllUsers(req.params.uid)
              .then(status => res.send(status));
 
      /**
