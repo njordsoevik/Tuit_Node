@@ -33,15 +33,7 @@ export default class UserController implements UserControllerI {
     public static getInstance = (app: Express): UserController => {
         if(UserController.userController === null) {
             UserController.userController = new UserController();
-            
-            // for testing without postman. Not RESTful
-            app.get("/api/users/create",
-                UserController.userController.createUser);
-            app.get("/api/users/:uid/delete",
-                UserController.userController.deleteUser);
-            app.get("/api/users/delete",
-                UserController.userController.deleteAllUsers);
-            
+
             // RESTful User Web service API
             app.get("/api/users",
                 UserController.userController.findAllUsers);
@@ -54,6 +46,19 @@ export default class UserController implements UserControllerI {
             app.delete("/api/users/:uid",
                 UserController.userController.deleteUser);
             app.delete("/api/users",
+                UserController.userController.deleteAllUsers);
+
+            app.post("/api/login",
+                UserController.userController.login);
+
+            // for testing. Not RESTful
+            app.get("/api/users/create",
+                UserController.userController.createUser);
+            app.get("/api/users/id/:uid/delete",
+                UserController.userController.deleteUser);
+            app.get("/api/users/username/:username/delete",
+                UserController.userController.deleteUsersByUsername);
+            app.get("/api/users/delete",
                 UserController.userController.deleteAllUsers);
         }
         return UserController.userController;
