@@ -19,12 +19,14 @@ import BookmarkController from "./controllers/BookmarkController";
 import MessageController from "./controllers/MessageController";
 import FollowController from "./controllers/FollowController";
 import mongoose from "mongoose";
+var cors = require('cors')
 
 // build the connection string
 mongoose.connect('mongodb+srv://nsoevik:England11@cluster0.9uq33.mongodb.net/test')
 
 const app = express();
 app.use(express.json());
+app.use(cors());
 
 app.get('/', (req: Request, res: Response) =>
     res.send('Welcome!'));
