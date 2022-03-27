@@ -1,8 +1,5 @@
 import {Request, Response} from "express";
 
-/**
- * @file Declares API methods for Courses related data access object methods
- */
 export default interface CourseController {
     findAllCourses(req: Request, res: Response): Promise<any>;
     findAllCoursesDeep(req: Request, res: Response): Promise<any>;

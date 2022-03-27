@@ -2,7 +2,6 @@ import SectionDaoI from "../interfaces/SectionDao";
 import Section from "../mongoose/sections/Section";
 import SectionModel from "../mongoose/sections/SectionModel";
 
-
 export default class SectionDao implements SectionDaoI {
     static instance: SectionDao = new SectionDao();
     private constructor() {}
