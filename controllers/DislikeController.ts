@@ -30,48 +30,12 @@ export default class DislikeController implements DislikeControllerI {
     public static getInstance = (app: Express): DislikeController => {
         if(DislikeController.DislikeController === null) {
             DislikeController.DislikeController = new DislikeController();
-            app.get("/api/users/:uid/dislikes", DislikeController.DislikeController.findAllTuitsDislikedByUser);
-            app.get("/api/tuits/:tid/dislikes", DislikeController.DislikeController.findAllUsersThatDislikedTuit);
             app.put("/api/users/:uid/dislikes/:tid", DislikeController.DislikeController.userTogglesTuitDislikes);
         }
         return DislikeController.DislikeController;
     }
 
     private constructor() {}
-
-    /**
-     * Retrieves all users that disliked a tuit from the database
-     * @param {Request} req Represents request from client, including the path
-     * parameter tid representing the disliked tuit
-     * @param {Response} res Represents response to client, including the
-     * body formatted as JSON arrays containing the user objects
-     */
-    findAllUsersThatDislikedTuit = (req: Request, res: Response) =>
-        DislikeController.DislikeDao.findAllUsersThatDislikedTuit(req.params.tid)
-            .then(dislikes => res.json(dislikes));
-
-    /**
-     * Retrieves all tuits disliked by a user from the database
-     * @param {Request} req Represents request from client, including the path
-     * parameter uid representing the user disliked the tuits
-     * @param {Response} res Represents response to client, including the
-     * body formatted as JSON arrays containing the tuit objects that were disliked
-     */
-    findAllTuitsDislikedByUser = (req: Request, res: Response) => {
-        const uid = req.params.uid;
-        // @ts-ignore
-        const profile = req.session['profile'];
-        const userId = uid === "me" && profile ?
-            profile._id : uid;
-
-        DislikeController.DislikeDao.findAllTuitsDislikedByUser(userId)
-            .then(dislikes => {
-                const dislikesNonNullTuits = dislikes.filter(dislike => dislike.tuit);
-                const tuitsFromDislikes = dislikesNonNullTuits.map(dislike => dislike.tuit);
-                res.json(tuitsFromDislikes);
-            });
-    }
-
     /**
      * @param {Request} req Represents request from client, including the
      * path parameters uid and tid representing the user that is disliking the tuit
