@@ -78,7 +78,7 @@ export default class LikeController implements LikeControllerI {
             });
     }
 
-    
+
     /**
      * @param {Request} req Represents request from client, including the
      * path parameters uid and tid representing the user that is liking the tuit
